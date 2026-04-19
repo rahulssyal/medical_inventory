@@ -16,7 +16,7 @@ if not SECRET_KEY:
 # Allowed hosts - update with your domain
 ALLOWED_HOSTS = [
     'your-app-name.onrender.com',  # For Render
-    'web-production-09314.up.railway.app',  # Your Railway domain
+    'medicalinventory-production.up.railway.app',  # Your Railway domain
     'your-domain.com',  # Your custom domain
     'localhost',
     '127.0.0.1',
