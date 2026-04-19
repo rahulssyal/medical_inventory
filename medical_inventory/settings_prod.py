@@ -13,11 +13,33 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'your-production-secret-key-change-thi
 # Allowed hosts - update with your domain
 ALLOWED_HOSTS = [
     'your-app-name.onrender.com',  # For Render
-    'your-app-name.up.railway.app',  # For Railway
+    'web-production-09314.up.railway.app',  # Your Railway domain
     'your-domain.com',  # Your custom domain
     'localhost',
     '127.0.0.1',
 ]
+
+# Dynamically add Railway and other deployment hosts
+deployment_hosts = os.environ.get('ALLOWED_HOSTS', '')
+if deployment_hosts:
+    ALLOWED_HOSTS.extend([host.strip() for host in deployment_hosts.split(',')])
+
+# Add Railway domain if available
+railway_domain = os.environ.get('RAILWAY_STATIC_URL', '').replace('https://', '').replace('http://', '')
+if railway_domain:
+    ALLOWED_HOSTS.append(railway_domain)
+
+# For Railway, also try to get the domain from other env vars
+railway_project_domain = os.environ.get('RAILWAY_PROJECT_DOMAIN')
+if railway_project_domain:
+    ALLOWED_HOSTS.append(railway_project_domain)
+
+# If no specific domain found, allow Railway pattern (less secure but works)
+if any('railway' in host for host in ALLOWED_HOSTS):
+    pass  # Already have Railway hosts
+elif os.environ.get('RAILWAY_ENVIRONMENT'):
+    # Add the specific Railway domain from the error message pattern
+    ALLOWED_HOSTS.append('web-production-09314.up.railway.app')
 
 # Database - switch to PostgreSQL for production
 DATABASES = {
