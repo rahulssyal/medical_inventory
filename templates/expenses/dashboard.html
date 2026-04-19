@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Expenses Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="fas fa-receipt"></i> Expense Tracking Dashboard</h2>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-danger">${{ total_expenses|floatformat:2 }}</h3>
+                <p class="card-text">Total Expenses</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-warning">{{ pending_approvals }}</h3>
+                <p class="card-text">Pending Approvals</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-info">${{ this_month_expenses|floatformat:2 }}</h3>
+                <p class="card-text">This Month Expenses</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <a href="/admin/expenses/expense/" class="btn btn-primary me-2" target="_blank">
+                    <i class="fas fa-plus"></i> Add Expense
+                </a>
+                <a href="/admin/expenses/expensecategory/" class="btn btn-secondary me-2" target="_blank">
+                    <i class="fas fa-tags"></i> Manage Categories
+                </a>
+                <a href="/admin/expenses/dailyexpense/" class="btn btn-info" target="_blank">
+                    <i class="fas fa-calendar-day"></i> Daily Expenses
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>API Endpoints</h5>
+            </div>
+            <div class="card-body">
+                <a href="/expenses/api/expenses/" class="btn btn-outline-primary btn-sm me-2" target="_blank">
+                    Expenses API
+                </a>
+                <a href="/expenses/api/expense-categories/" class="btn btn-outline-secondary btn-sm me-2" target="_blank">
+                    Categories API
+                </a>
+                <a href="/expenses/api/daily-expenses/" class="btn btn-outline-info btn-sm" target="_blank">
+                    Daily Expenses API
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Expense Tracking Features</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Comprehensive expense management and tracking:</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success me-2"></i> Daily expense recording with categories</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Expense approval workflow</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Budget monitoring and alerts</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Receipt image uploads</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Monthly and yearly expense reports</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Medical Inventory Management{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-tachometer-alt"></i> Medical Equipment Inventory Management System</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Welcome to the comprehensive medical equipment inventory management system.</p>
+
+                <div class="row mt-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body text-center">
+                                <i class="fas fa-boxes fa-3x mb-3"></i>
+                                <h5>Inventory Management</h5>
+                                <p>Manage medical equipment, stock levels, and suppliers</p>
+                                <a href="{% url 'inventory_dashboard' %}" class="btn btn-light">Access Inventory</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body text-center">
+                                <i class="fas fa-question-circle fa-3x mb-3"></i>
+                                <h5>Enquiry Management</h5>
+                                <p>Handle customer enquiries and follow-ups</p>
+                                <a href="{% url 'enquiries_dashboard' %}" class="btn btn-light">Manage Enquiries</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-info text-white">
+                            <div class="card-body text-center">
+                                <i class="fas fa-shopping-cart fa-3x mb-3"></i>
+                                <h5>Order Processing</h5>
+                                <p>Process orders and track delivery status</p>
+                                <a href="{% url 'orders_dashboard' %}" class="btn btn-light">View Orders</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body text-center">
+                                <i class="fas fa-money-bill fa-3x mb-3"></i>
+                                <h5>Payment Management</h5>
+                                <p>Track payments, receipts, and outstanding amounts</p>
+                                <a href="{% url 'payments_dashboard' %}" class="btn btn-light">Manage Payments</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body text-center">
+                                <i class="fas fa-bullhorn fa-3x mb-3"></i>
+                                <h5>Marketing Management</h5>
+                                <p>Plan events, campaigns, and track leads</p>
+                                <a href="{% url 'marketing_dashboard' %}" class="btn btn-light">Marketing Tools</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-secondary text-white">
+                            <div class="card-body text-center">
+                                <i class="fas fa-receipt fa-3x mb-3"></i>
+                                <h5>Expense Tracking</h5>
+                                <p>Monitor daily expenses and budget</p>
+                                <a href="{% url 'expenses_dashboard' %}" class="btn btn-light">Track Expenses</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Quick Actions</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>API Endpoints</h6>
+                                        <ul class="list-unstyled">
+                                            <li><a href="/inventory/api/equipment/" target="_blank">Equipment API</a></li>
+                                            <li><a href="/enquiries/api/enquiries/" target="_blank">Enquiries API</a></li>
+                                            <li><a href="/orders/api/orders/" target="_blank">Orders API</a></li>
+                                            <li><a href="/payments/api/payments/" target="_blank">Payments API</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Administration</h6>
+                                        <ul class="list-unstyled">
+                                            <li><a href="/admin/" target="_blank">Django Admin Panel</a></li>
+                                            <li><a href="/api-auth/login/" target="_blank">API Authentication</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Orders Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="fas fa-shopping-cart"></i> Order Processing Dashboard</h2>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-primary">{{ total_orders }}</h3>
+                <p class="card-text">Total Orders</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-warning">{{ pending_orders }}</h3>
+                <p class="card-text">Pending Orders</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-success">{{ completed_orders }}</h3>
+                <p class="card-text">Completed Orders</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-info">${{ total_revenue|floatformat:2 }}</h3>
+                <p class="card-text">Total Revenue</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <a href="/admin/orders/order/" class="btn btn-primary me-2" target="_blank">
+                    <i class="fas fa-plus"></i> Create Order
+                </a>
+                <a href="/admin/orders/orderitem/" class="btn btn-secondary me-2" target="_blank">
+                    <i class="fas fa-list"></i> Manage Order Items
+                </a>
+                <a href="/admin/orders/orderstatushistory/" class="btn btn-info" target="_blank">
+                    <i class="fas fa-history"></i> Status History
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>API Endpoints</h5>
+            </div>
+            <div class="card-body">
+                <a href="/orders/api/orders/" class="btn btn-outline-primary btn-sm me-2" target="_blank">
+                    Orders API
+                </a>
+                <a href="/orders/api/order-items/" class="btn btn-outline-secondary btn-sm me-2" target="_blank">
+                    Order Items API
+                </a>
+                <a href="/orders/api/order-status-history/" class="btn btn-outline-info btn-sm" target="_blank">
+                    Status History API
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Order Processing Features</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Complete order lifecycle management:</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success me-2"></i> Order creation from enquiries</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Status tracking (Draft → Confirmed → Processing → Shipped → Delivered)</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Order item management with pricing</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Delivery date tracking</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Order history and audit trail</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

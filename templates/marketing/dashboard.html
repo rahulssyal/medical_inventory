@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Marketing Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="fas fa-bullhorn"></i> Marketing Management Dashboard</h2>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-primary">{{ total_events }}</h3>
+                <p class="card-text">Total Events</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-info">{{ upcoming_events }}</h3>
+                <p class="card-text">Upcoming Events</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-success">{{ active_campaigns }}</h3>
+                <p class="card-text">Active Campaigns</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-warning">{{ total_leads }}</h3>
+                <p class="card-text">Total Leads</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <a href="/admin/marketing/event/" class="btn btn-primary me-2" target="_blank">
+                    <i class="fas fa-calendar-plus"></i> Add Event
+                </a>
+                <a href="/admin/marketing/marketingcampaign/" class="btn btn-secondary me-2" target="_blank">
+                    <i class="fas fa-bullhorn"></i> Create Campaign
+                </a>
+                <a href="/admin/marketing/lead/" class="btn btn-info" target="_blank">
+                    <i class="fas fa-user-plus"></i> Add Lead
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>API Endpoints</h5>
+            </div>
+            <div class="card-body">
+                <a href="/marketing/api/events/" class="btn btn-outline-primary btn-sm me-2" target="_blank">
+                    Events API
+                </a>
+                <a href="/marketing/api/campaigns/" class="btn btn-outline-secondary btn-sm me-2" target="_blank">
+                    Campaigns API
+                </a>
+                <a href="/marketing/api/leads/" class="btn btn-outline-info btn-sm" target="_blank">
+                    Leads API
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Marketing Features</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Comprehensive marketing management tools:</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success me-2"></i> Event planning and tracking (conferences, workshops, trade shows)</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Marketing campaign management with budget tracking</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Lead generation and conversion tracking</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Customer relationship management</li>
+                    <li><i class="fas fa-check text-success me-2"></i> ROI analysis and reporting</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

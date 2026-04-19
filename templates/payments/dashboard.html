@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Payments Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="fas fa-money-bill"></i> Payment Management Dashboard</h2>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-success">${{ total_payments|floatformat:2 }}</h3>
+                <p class="card-text">Total Payments Received</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-warning">{{ pending_payments }}</h3>
+                <p class="card-text">Pending Payments</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="text-danger">{{ overdue_payments }}</h3>
+                <p class="card-text">Overdue Payments</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <a href="/admin/payments/payment/" class="btn btn-primary me-2" target="_blank">
+                    <i class="fas fa-plus"></i> Record Payment
+                </a>
+                <a href="/admin/payments/receipt/" class="btn btn-secondary me-2" target="_blank">
+                    <i class="fas fa-receipt"></i> Generate Receipt
+                </a>
+                <a href="/admin/payments/paymentreminder/" class="btn btn-info" target="_blank">
+                    <i class="fas fa-bell"></i> Payment Reminders
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>API Endpoints</h5>
+            </div>
+            <div class="card-body">
+                <a href="/payments/api/payments/" class="btn btn-outline-primary btn-sm me-2" target="_blank">
+                    Payments API
+                </a>
+                <a href="/payments/api/receipts/" class="btn btn-outline-secondary btn-sm me-2" target="_blank">
+                    Receipts API
+                </a>
+                <a href="/payments/api/payment-reminders/" class="btn btn-outline-info btn-sm" target="_blank">
+                    Reminders API
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Payment Management Features</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Comprehensive payment processing and tracking:</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success me-2"></i> Multiple payment methods (Cash, Bank Transfer, Cheque, Credit Card)</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Payment status tracking (Pending, Partial, Paid, Overdue)</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Automatic receipt generation</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Payment reminder system</li>
+                    <li><i class="fas fa-check text-success me-2"></i> Outstanding balance tracking</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
