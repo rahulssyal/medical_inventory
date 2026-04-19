@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import RedirectView
 from rest_framework.authtoken import views
 from django.shortcuts import render
 
@@ -29,6 +30,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', views.obtain_auth_token),
+    path('accounts/profile/', RedirectView.as_view(url='/', permanent=False), name='profile'),
+    path('accounts/', include('django.contrib.auth.urls')),
 
     # App URLs
     path('inventory/', include('inventory.urls')),

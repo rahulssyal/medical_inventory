@@ -46,6 +46,86 @@ A comprehensive Django-based inventory management system designed specifically f
 - Budget monitoring
 - Approval workflow
 
+## 🚀 Deployment to Railway
+
+### Prerequisites
+1. Create a [Railway account](https://railway.app)
+2. Install Railway CLI (optional):
+   ```bash
+   npm install -g @railway/cli
+   railway login
+   ```
+
+### Deploy Steps
+
+#### Option 1: GitHub Integration (Recommended)
+1. **Push to GitHub** (if not already done):
+   ```bash
+   git add .
+   git commit -m "Ready for deployment"
+   git push origin master
+   ```
+
+2. **Deploy on Railway**:
+   - Go to [Railway Dashboard](https://railway.app/dashboard)
+   - Click "New Project" → "Deploy from GitHub repo"
+   - Connect your GitHub account
+   - Select your `medical_inventory` repository
+   - Click "Deploy"
+
+3. **Configure Environment Variables**:
+   In Railway project settings, add these variables:
+   ```
+   SECRET_KEY=your-super-secret-key-here-make-it-long-and-random
+   DEBUG=False
+   DJANGO_SETTINGS_MODULE=medical_inventory.settings_prod
+   ```
+
+4. **Database Setup**:
+   Railway automatically creates a PostgreSQL database. The connection details are available in your project variables.
+
+#### Option 2: Railway CLI
+```bash
+railway login
+railway init
+railway up
+```
+
+### Post-Deployment Setup
+1. **Run Migrations**:
+   ```bash
+   railway run python manage.py migrate
+   ```
+
+2. **Create Superuser**:
+   ```bash
+   railway run python manage.py createsuperuser
+   ```
+
+3. **Collect Static Files**:
+   ```bash
+   railway run python manage.py collectstatic --noinput
+   ```
+
+### Access Your App
+- **Main App**: `https://your-project-name.up.railway.app/`
+- **Admin Panel**: `https://your-project-name.up.railway.app/admin/`
+
+### Environment Variables Reference
+```
+SECRET_KEY=your-secret-key
+DEBUG=False
+DJANGO_SETTINGS_MODULE=medical_inventory.settings_prod
+DATABASE_URL=postgresql://... (auto-provided by Railway)
+```
+
+### Troubleshooting
+- Check Railway logs in the dashboard
+- Ensure all environment variables are set
+- Verify database connection in Railway variables
+
+---
+
 ## Technology Stack
 
 - **Backend**: Django 6.0.4
