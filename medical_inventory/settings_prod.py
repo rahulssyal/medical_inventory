@@ -4,11 +4,14 @@ Override development settings for production deployment
 """
 
 import os
+import dj_database_url
 from .settings import *
 
 # Security settings
 DEBUG = False
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-production-secret-key-change-this')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    raise ValueError('The SECRET_KEY environment variable must be set in production.')
 
 # Allowed hosts - update with your domain
 ALLOWED_HOSTS = [
@@ -34,12 +37,10 @@ railway_project_domain = os.environ.get('RAILWAY_PROJECT_DOMAIN')
 if railway_project_domain:
     ALLOWED_HOSTS.append(railway_project_domain)
 
-# If no specific domain found, allow Railway pattern (less secure but works)
-if any('railway' in host for host in ALLOWED_HOSTS):
-    pass  # Already have Railway hosts
-elif os.environ.get('RAILWAY_ENVIRONMENT'):
-    # Add the specific Railway domain from the error message pattern
-    ALLOWED_HOSTS.append('web-production-09314.up.railway.app')
+# Add any allowed hosts from environment variables
+allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
+if allowed_hosts_env:
+    ALLOWED_HOSTS.extend([host.strip() for host in allowed_hosts_env.split(',') if host.strip()])
 
 # Database - switch to PostgreSQL for production
 DATABASES = {
@@ -55,6 +56,10 @@ DATABASES = {
         }
     }
 }
+
+database_url = os.environ.get('DATABASE_URL')
+if database_url:
+    DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600, ssl_require=True)
 
 # Static files for production
 STATIC_URL = '/static/'
