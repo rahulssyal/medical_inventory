@@ -42,24 +42,45 @@ allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '')
 if allowed_hosts_env:
     ALLOWED_HOSTS.extend([host.strip() for host in allowed_hosts_env.split(',') if host.strip()])
 
-# Database - switch to PostgreSQL for production
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'medical_inventory'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
-        'OPTIONS': {
-            'sslmode': 'require' if os.environ.get('DB_SSL', 'false').lower() == 'true' else 'disable',
+# CSRF trusted origins - required for Django 4+ in production
+CSRF_TRUSTED_ORIGINS = [
+    'https://medicalinventory-production.up.railway.app',
+    'https://your-frontend-domain.com',
+]
+
+# Add Railway domain to CSRF trusted origins if available
+if railway_domain:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{railway_domain}')
+if railway_project_domain:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{railway_project_domain}')
+
+# Add CSRF trusted origins from environment variables
+csrf_origins_env = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
+if csrf_origins_env:
+    CSRF_TRUSTED_ORIGINS.extend([origin.strip() for origin in csrf_origins_env.split(',') if origin.strip()])
+
+# Database - enable PostgreSQL only when Railway provides a production database
+# through DATABASE_URL or when DB_* environment variables are explicitly set.
+database_url = os.environ.get('DATABASE_URL')
+db_host = os.environ.get('DB_HOST')
+if database_url or db_host:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DB_NAME', 'medical_inventory'),
+            'USER': os.environ.get('DB_USER', 'postgres'),
+            'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+            'HOST': os.environ.get('DB_HOST', 'localhost'),
+            'PORT': os.environ.get('DB_PORT', '5432'),
+            'OPTIONS': {
+                'sslmode': 'require' if os.environ.get('DB_SSL', 'false').lower() == 'true' else 'disable',
+            }
         }
     }
-}
 
-database_url = os.environ.get('DATABASE_URL')
-if database_url:
-    DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600, ssl_require=True)
+    if database_url:
+        ssl_require = os.environ.get('DB_SSL', 'false').lower() == 'true'
+        DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600, ssl_require=ssl_require)
 
 # Static files for production
 STATIC_URL = '/static/'

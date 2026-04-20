@@ -107,6 +107,20 @@ railway up
    railway run python manage.py collectstatic --noinput
    ```
 
+### Railway PostgreSQL Setup
+1. Add a PostgreSQL database in Railway: use the dashboard or Railway CLI.
+   - In the dashboard: Add Plugin → PostgreSQL
+   - Railway will automatically provision the DB and set `DATABASE_URL`
+2. Confirm `DJANGO_SETTINGS_MODULE=medical_inventory.settings_prod` is set for production.
+3. Set `SECRET_KEY` in Railway environment variables.
+4. If you prefer explicit database variables instead of `DATABASE_URL`, set:
+   - `DB_NAME`
+   - `DB_USER`
+   - `DB_PASSWORD`
+   - `DB_HOST`
+   - `DB_PORT`
+   - `DB_SSL=true`
+
 ### Access Your App
 - **Main App**: `https://your-project-name.up.railway.app/`
 - **Admin Panel**: `https://your-project-name.up.railway.app/admin/`
@@ -117,6 +131,7 @@ SECRET_KEY=your-secret-key
 DEBUG=False
 DJANGO_SETTINGS_MODULE=medical_inventory.settings_prod
 DATABASE_URL=postgresql://... (auto-provided by Railway)
+DB_SSL=true
 ```
 
 ### Troubleshooting
