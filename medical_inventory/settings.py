@@ -25,6 +25,12 @@ SECRET_KEY = 'django-insecure-1zso=9o!kv2v9d6v5k(#0*-5i4^)v$re7a4t_0sy8c)y_*&q-+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ["medicalinventory-production.up.railway.app"]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ['https://medicalinventory-production.up.railway.app']
+
 ALLOWED_HOSTS = []
 
 
