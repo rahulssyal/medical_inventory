@@ -30,6 +30,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://medicalinventory-production.up.railway.app']
+USE_X_FORWARDED_HOST = True
+CSRF_COOKIE_DOMAIN = ".medicalinventory-production.up.railway.app"
 
 ALLOWED_HOSTS = []
 
